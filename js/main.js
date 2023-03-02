@@ -3,7 +3,7 @@
 const PHOTOS_COUNT = 25;
 const AVATARS_COUNT = 6;
 const COMMENTS_COUNT = 1;
-const LikesCount = {min: 15, max: 200};
+const LikesCount = {MIN: 15, MAX: 200};
 
 const NAMES = [
   'Александр',
@@ -64,7 +64,7 @@ const createPhoto = () => ({
   id: generatePhotoId(),
   url: `photos/${ generatePhotoUrl() }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
-  likes: getRandomInteger(LikesCount.min, LikesCount.max),
+  likes: getRandomInteger(LikesCount.MIN, LikesCount.MAX),
   comments: Array.from({length: COMMENTS_COUNT}, createComment),
 });
 
