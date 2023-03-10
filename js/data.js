@@ -2,7 +2,7 @@ import {getRandomInteger, getRandomArrayElement, createIdGenerator} from './util
 
 const PHOTOS_COUNT = 25;
 const AVATARS_COUNT = 6;
-const COMMENTS_COUNT = 1;
+const CommentsCount = {MIN: 1, MAX: 2};
 const LikesCount = {MIN: 15, MAX: 200};
 
 const NAMES = [
@@ -32,7 +32,6 @@ const DESCRIPTIONS = [
   'Красота в глазах смотрящего',
 ];
 
-const generatePhotoId = createIdGenerator();
 const generateCommentId = createIdGenerator();
 
 const createComment = () => ({
@@ -42,14 +41,14 @@ const createComment = () => ({
   names: getRandomArrayElement(NAMES),
 });
 
-const createPhoto = () => ({
-  id: generatePhotoId(),
-  url: `photos/${ generatePhotoId() }.jpg`,
+const createPhoto = (index) => ({
+  id: index,
+  url: `photos/${ index }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LikesCount.MIN, LikesCount.MAX),
-  comments: Array.from({length: COMMENTS_COUNT}, createComment),
+  comments: Array.from({length: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX)}, createComment),
 });
 
-const getPhotos = () => Array.from({length: PHOTOS_COUNT}, createPhoto);
+const getPhotos = () => Array.from({length: PHOTOS_COUNT}, (_, photoIndex) => createPhoto(photoIndex + 1));
 
 export {getPhotos};
