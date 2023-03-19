@@ -1,3 +1,5 @@
+/*Генерация данных*/
+
 import {getRandomInteger, getRandomArrayElement, createIdGenerator} from './util.js';
 
 const PHOTOS_COUNT = 25;
@@ -37,8 +39,8 @@ const generateCommentId = createIdGenerator();
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${ getRandomInteger(1, AVATARS_COUNT) }.svg`,
-  messages: getRandomArrayElement(COMMENTS),
-  names: getRandomArrayElement(NAMES),
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES),
 });
 
 const createPhoto = (index) => ({
