@@ -1,13 +1,20 @@
-/*Открытие и закрытие полноразмерных изображений*/
+/*Отрисовка и загрузка комментариев. Открытие и закрытие полноразмерных изображений*/
 
 import {isEscapeKey} from './util.js';
 import {renderMiniatures, photosContainer} from './miniature.js';
 import {renderBigPhoto} from './big-photo.js';
 
+const COMMENTS_BLOCK = 5;
+
 const bigPhoto = document.querySelector('.big-picture');
 const bigPhotoClose = bigPhoto.querySelector('.big-picture__cancel');
-const commentsCount = document.querySelector('.social__comment-count');/*hidden*/
-const commentsLoaderButton = document.querySelector('.comments-loader');/*hidden*/
+const commentsContainer = bigPhoto.querySelector('.social__comments');
+const commentTemplate = commentsContainer.querySelector('.social__comment');
+const commentsCount = bigPhoto.querySelector('.social__comment-count');
+const commentsLoaderButton = bigPhoto.querySelector('.comments-loader');
+
+let commentsLoaded = 0;
+let comments = [];
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -16,15 +23,47 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const renderComment = (({avatar, name, message}) => {
+  const comment = commentTemplate.cloneNode(true);
+  comment.querySelector('.social__picture').src = avatar;
+  comment.querySelector('.social__picture').alt = name;
+  comment.querySelector('.social__text').textContent = message;
+
+  return comment;
+});
+
+const renderComments = () => {
+  commentsLoaded += COMMENTS_BLOCK;
+
+  if (commentsLoaded >= comments.length) {
+    commentsLoaderButton.classList.add('hidden');
+    commentsLoaded = comments.length;
+  } else {
+    commentsLoaderButton.classList.remove('hidden');
+  }
+  const commentsFragment = document.createDocumentFragment();
+  for (let i = 0; i < commentsLoaded; i++) {
+    const commentElement = renderComment(comments[i]);
+    commentsFragment.append(commentElement);
+  }
+  commentsContainer.innerHTML = '';
+  commentsContainer.append(commentsFragment);
+  commentsCount.innerHTML = `${commentsLoaded} из <span class="comments-count">${comments.length}</span> комментариев`;
+};
+
 const openBigPhoto = (element) => {
   bigPhoto.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  commentsCount.classList.add('hidden');
-  commentsLoaderButton.classList.add('hidden');
   renderBigPhoto(element);
+  comments = element.comments;
+  commentsLoaded = 0;
+  renderComments();
 
   document.addEventListener('keydown', onDocumentKeydown);
 };
+
+const onCommentsLoaderButtonClick = () => renderComments();
+commentsLoaderButton.addEventListener('click', onCommentsLoaderButtonClick);
 
 photosContainer.addEventListener('click', (evt) => {
   const targetMiniature = evt.target.closest('.picture');

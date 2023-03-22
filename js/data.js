@@ -4,7 +4,7 @@ import {getRandomInteger, getRandomArrayElement, createIdGenerator} from './util
 
 const PHOTOS_COUNT = 25;
 const AVATARS_COUNT = 6;
-const CommentsCount = {MIN: 1, MAX: 2};
+const CommentsCount = {MIN: 0, MAX: 10};
 const LikesCount = {MIN: 15, MAX: 200};
 
 const NAMES = [
