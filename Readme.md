@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Эдуард Казарян](https://up.htmlacademy.ru/javascript/28/user/2202819).
-* Наставник: [Александр Бабченко](https://htmlacademy.ru/profile/babtshe).
+* Наставник: [Семён Якушев](https://htmlacademy.ru/profile/id1118791).
 
 ---
 

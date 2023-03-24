@@ -1408,3 +1408,7 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__error-text {
+  color: red;
+}
