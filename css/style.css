@@ -1410,5 +1410,8 @@ main {
 }
 
 .img-upload__error-text {
-  color: red;
+  padding: 5px;
+  margin-bottom: 15px;
+  background-color: red;
+  border: 1px solid black;
 }
