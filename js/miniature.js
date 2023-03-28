@@ -28,4 +28,4 @@ const createMiniaturesList = (miniatures) => {
 const renderMiniatures = getPhotos();
 createMiniaturesList(renderMiniatures);
 
-export {renderMiniatures, photosContainer};
+export {renderMiniatures};
