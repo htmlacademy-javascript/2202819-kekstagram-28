@@ -51,7 +51,7 @@ const EFFECTS = [
   }
 ];
 
-const photoElement = document.querySelector('.img-upload__preview img');
+const photoPreview = document.querySelector('.img-upload__preview img');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectValue = document.querySelector('.effect-level__value');
@@ -88,7 +88,7 @@ const onEffectsChange = (evt) => {
     return;
   }
   currentEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  photoElement.className = `effects__preview--${currentEffect.name}`;
+  photoPreview.className = `effects__preview--${currentEffect.name}`;
   updateSlider();
 };
 
@@ -96,7 +96,7 @@ photoEffects.addEventListener('change', onEffectsChange);
 
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
-  photoElement.style.filter = isDefault()
+  photoPreview.style.filter = isDefault()
     ? DEFAULT_EFFECT.style
     : `${currentEffect.style}(${sliderValue}${currentEffect.unit})`;
   effectValue.value = sliderValue;
