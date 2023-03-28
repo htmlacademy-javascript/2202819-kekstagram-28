@@ -1,11 +1,12 @@
 /*Отрисовка и загрузка комментариев. Открытие и закрытие полноразмерных изображений*/
 
 import {isEscapeKey} from './util.js';
-import {renderMiniatures, photosContainer} from './miniature.js';
+import {renderMiniatures} from './miniature.js';
 import {renderBigPhoto} from './big-photo.js';
 
 const COMMENTS_BLOCK = 5;
 
+const photosContainer = document.querySelector('.pictures');
 const bigPhoto = document.querySelector('.big-picture');
 const bigPhotoClose = bigPhoto.querySelector('.big-picture__cancel');
 const commentsContainer = bigPhoto.querySelector('.social__comments');
