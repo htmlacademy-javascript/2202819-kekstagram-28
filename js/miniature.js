@@ -1,12 +1,10 @@
 /*Отрисовка миниатюр*/
 
-import {getPhotos} from './data.js';
-
-const photosContainer = document.querySelector('.pictures');
-const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const picturesContainer = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const renderMiniature = (({url, description, likes, comments, id}) => {
-  const miniature = photoTemplate.cloneNode(true);
+  const miniature = pictureTemplate.cloneNode(true);
   miniature.querySelector('.picture__img').src = url;
   miniature.querySelector('.picture__img').alt = description;
   miniature.querySelector('.picture__likes').textContent = likes;
@@ -16,16 +14,13 @@ const renderMiniature = (({url, description, likes, comments, id}) => {
   return miniature;
 });
 
-const createMiniaturesList = (miniatures) => {
+const renderMiniatures = (miniatures) => {
   const miniaturesListFragment = document.createDocumentFragment();
 
   miniatures.forEach((miniature) => {
     miniaturesListFragment.append(renderMiniature(miniature));
   });
-  photosContainer.append(miniaturesListFragment);
+  picturesContainer.append(miniaturesListFragment);
 };
-
-const renderMiniatures = getPhotos();
-createMiniaturesList(renderMiniatures);
 
 export {renderMiniatures};
