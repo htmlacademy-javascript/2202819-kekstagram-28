@@ -4,7 +4,7 @@ import {sendData} from './api.js';
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
-import {messageType, openSuccessMessage, openErrorMessage} from './message.js';
+import {getMessageType, openSuccessMessage, openErrorMessage} from './message.js';
 import {pristineValidate, pristineReset, isTextFieldFocused} from './form-validation.js';
 
 const pictureUploadForm = document.querySelector('.img-upload__form');
@@ -19,7 +19,7 @@ const SubmitButtonText = {
 };
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && !isTextFieldFocused() && !messageType()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !getMessageType()) {
     evt.preventDefault();
     pictureCloseButton.click();
   }
