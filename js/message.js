@@ -5,10 +5,10 @@ import {isEscapeKey} from './util.js';
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
-const messageType = () => document.querySelector('.error, .success');
+const getMessageType = () => document.querySelector('.error, .success');
 
 const closeMessage = () => {
-  const message = messageType();
+  const message = getMessageType();
   if (message) {
     message.remove();
   }
@@ -38,17 +38,17 @@ const openSuccessMessage = () => {
 };
 
 function onMessageKeydown (evt) {
-  if (isEscapeKey(evt) && messageType()) {
+  if (isEscapeKey(evt) && getMessageType()) {
     evt.preventDefault();
     closeMessage();
   }
 }
 
 function onOutsideClick (evt) {
-  const type = messageType();
+  const type = getMessageType();
   if (evt.target === type) {
     closeMessage();
   }
 }
 
-export {messageType, openSuccessMessage, openErrorMessage};
+export {getMessageType, openSuccessMessage, openErrorMessage};
