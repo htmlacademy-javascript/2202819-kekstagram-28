@@ -1,46 +1,76 @@
 /*Формы загрузки и редактирования изображения*/
 
+import {sendData} from './api.js';
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
+import {getMessageType, openSuccessMessage, openErrorMessage} from './message.js';
 import {pristineValidate, pristineReset, isTextFieldFocused} from './form-validation.js';
 
-const photoUploadForm = document.querySelector('.img-upload__form');
-const photoEditForm = photoUploadForm.querySelector('.img-upload__overlay');
-const photoUploadButton = photoUploadForm.querySelector('.img-upload__input');
-const photoCloseButton = photoUploadForm.querySelector('.img-upload__cancel');
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && !isTextFieldFocused()) {
-    evt.preventDefault();
-    photoCloseButton.click();
-  }
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
 };
 
-const openImgUploadForm = () => {
-  photoEditForm.classList.remove('hidden');
+const pictureUploadForm = document.querySelector('.img-upload__form');
+const pictureEditForm = pictureUploadForm.querySelector('.img-upload__overlay');
+const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__input');
+const pictureCloseButton = pictureUploadForm.querySelector('.img-upload__cancel');
+const submitButton = pictureEditForm.querySelector('.img-upload__submit');
+
+const openPictureUploadForm = () => {
+  pictureEditForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-photoUploadButton.addEventListener('change', openImgUploadForm);
+pictureUploadButton.addEventListener('change', openPictureUploadForm);
 
-const closeImgUploadForm = () => {
-  photoUploadForm.reset();
+const closePictureUploadForm = () => {
+  pictureUploadForm.reset();
   resetScale();
   resetEffects();
   pristineReset();
-  photoEditForm.classList.add('hidden');
+  pictureEditForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-photoCloseButton.addEventListener('click', closeImgUploadForm);
+pictureCloseButton.addEventListener('click', closePictureUploadForm);
 
-const onPhotoUploadFormSubmit = (evt) => {
-  if(!pristineValidate()) {
-    evt.preventDefault();
-  }
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
-photoUploadForm.addEventListener('submit', onPhotoUploadFormSubmit);
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const onPictureUploadFormSubmit = () => {
+  pictureUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if(pristineValidate()) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(openSuccessMessage)
+        .then(closePictureUploadForm)
+        .catch(
+          () => {
+            openErrorMessage();
+          }
+        )
+        .finally(unblockSubmitButton);
+    }
+  });
+};
+
+function onDocumentKeydown (evt) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !getMessageType()) {
+    evt.preventDefault();
+    closePictureUploadForm();
+  }
+}
+
+export {onPictureUploadFormSubmit, closePictureUploadForm};

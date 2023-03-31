@@ -10,11 +10,11 @@ const ErrorMessages = {
   UNIQUENESS_ERROR: 'Хэш-теги не должны повторяться',
 };
 
-const photoUploadForm = document.querySelector('.img-upload__form');
-const hashtagField = photoUploadForm.querySelector('.text__hashtags');
-const commentField = photoUploadForm.querySelector('.text__description');
+const pictureUploadForm = document.querySelector('.img-upload__form');
+const hashtagField = pictureUploadForm.querySelector('.text__hashtags');
+const commentField = pictureUploadForm.querySelector('.text__description');
 
-const pristine = new Pristine(photoUploadForm, {
+const pristine = new Pristine(pictureUploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__error-text',
