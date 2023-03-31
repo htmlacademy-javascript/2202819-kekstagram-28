@@ -7,23 +7,16 @@ import {resetEffects} from './effect.js';
 import {getMessageType, openSuccessMessage, openErrorMessage} from './message.js';
 import {pristineValidate, pristineReset, isTextFieldFocused} from './form-validation.js';
 
-const pictureUploadForm = document.querySelector('.img-upload__form');
-const pictureEditForm = pictureUploadForm.querySelector('.img-upload__overlay');
-const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__input');
-const pictureCloseButton = pictureUploadForm.querySelector('.img-upload__cancel');
-const submitButton = pictureEditForm.querySelector('.img-upload__submit');
-
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
 };
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && !isTextFieldFocused() && !getMessageType()) {
-    evt.preventDefault();
-    pictureCloseButton.click();
-  }
-};
+const pictureUploadForm = document.querySelector('.img-upload__form');
+const pictureEditForm = pictureUploadForm.querySelector('.img-upload__overlay');
+const pictureUploadButton = pictureUploadForm.querySelector('.img-upload__input');
+const pictureCloseButton = pictureUploadForm.querySelector('.img-upload__cancel');
+const submitButton = pictureEditForm.querySelector('.img-upload__submit');
 
 const openPictureUploadForm = () => {
   pictureEditForm.classList.remove('hidden');
@@ -72,5 +65,12 @@ const onPictureUploadFormSubmit = () => {
     }
   });
 };
+
+function onDocumentKeydown (evt) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !getMessageType()) {
+    evt.preventDefault();
+    closePictureUploadForm();
+  }
+}
 
 export {onPictureUploadFormSubmit, closePictureUploadForm};
