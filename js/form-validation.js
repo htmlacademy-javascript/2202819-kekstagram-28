@@ -55,4 +55,4 @@ const isTextFieldFocused = () =>
 const pristineValidate = () => pristine.validate();
 const pristineReset = () => pristine.reset();
 
-export {pristineValidate, pristineReset, isTextFieldFocused};
+export {isTextFieldFocused, pristineValidate, pristineReset};
