@@ -38,7 +38,7 @@ const filterPictures = (pictures) => {
 
 const debouncedCreateGallery = debounce(createGallery, RERENDER_DELAY);
 
-const setFilterChangeHandler = (pictures) => {
+const setFilterClickHandler = (pictures) => {
   filtersContainer.addEventListener('click', (evt) => {
     if (!evt.target.classList.contains('img-filters__button')) {
       return;
@@ -58,4 +58,4 @@ const setFilterChangeHandler = (pictures) => {
   });
 };
 
-export {showFilters, setFilterChangeHandler};
+export {showFilters, setFilterClickHandler};
