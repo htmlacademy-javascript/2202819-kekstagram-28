@@ -4,8 +4,8 @@ import {sendData} from './api.js';
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
-import {getMessageType, openSuccessMessage, openErrorMessage} from './message.js';
-import {pristineValidate, pristineReset, isTextFieldFocused} from './form-validation.js';
+import {getMessageType, openErrorMessage, openSuccessMessage} from './message.js';
+import {isTextFieldFocused, pristineValidate, pristineReset} from './form-validation.js';
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -73,4 +73,4 @@ function onDocumentKeydown (evt) {
   }
 }
 
-export {onPictureUploadFormSubmit, closePictureUploadForm};
+export {closePictureUploadForm, onPictureUploadFormSubmit};

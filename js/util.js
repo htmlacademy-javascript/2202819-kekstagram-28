@@ -1,5 +1,16 @@
-/*Сообщение об ошибке при сбое загрузки данных с сервера*/
 /*Вспомогательная функция для Escape*/
+/*Вспомогательная функция для устранения дребезга*/
+/*Сообщение об ошибке при сбое загрузки данных с сервера*/
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
 const ALERT_SHOW_TIME = 5000;
 
@@ -24,6 +35,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
-
-export {showAlert, isEscapeKey};
+export {isEscapeKey, debounce, showAlert};
