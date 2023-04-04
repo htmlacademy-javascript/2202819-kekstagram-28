@@ -1,6 +1,6 @@
 /*Создание галереи*/
 
-import {openBigPicture} from './comments.js';
+import {openBigPicture} from './comment.js';
 import {renderMiniatures} from './miniature.js';
 
 const picturesContainer = document.querySelector('.pictures');
