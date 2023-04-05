@@ -4,6 +4,7 @@ import {sendData} from './api.js';
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
+import {uploadUserPicture} from './upload-user-picture.js';
 import {getMessageType, openErrorMessage, openSuccessMessage} from './message.js';
 import {isTextFieldFocused, pristineValidate, pristineReset} from './form-validation.js';
 
@@ -22,6 +23,7 @@ const openPictureUploadForm = () => {
   pictureEditForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  uploadUserPicture();
 };
 
 pictureUploadButton.addEventListener('change', openPictureUploadForm);
