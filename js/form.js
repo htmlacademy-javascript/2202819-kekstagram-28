@@ -22,8 +22,9 @@ const submitButton = pictureEditForm.querySelector('.img-upload__submit');
 const openPictureUploadForm = () => {
   pictureEditForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
   uploadUserPicture();
+
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
 pictureUploadButton.addEventListener('change', openPictureUploadForm);
@@ -35,7 +36,8 @@ const closePictureUploadForm = () => {
   pristineReset();
   pictureEditForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
 pictureCloseButton.addEventListener('click', closePictureUploadForm);

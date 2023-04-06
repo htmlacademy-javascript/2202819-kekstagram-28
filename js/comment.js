@@ -8,19 +8,12 @@ const COMMENTS_BLOCK = 5;
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
 const commentsContainer = bigPicture.querySelector('.social__comments');
-const commentTemplate = commentsContainer.querySelector('.social__comment');
 const commentsCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoaderButton = bigPicture.querySelector('.comments-loader');
+const commentTemplate = commentsContainer.querySelector('.social__comment');
 
 let commentsLoaded = 0;
 let comments = [];
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    bigPictureClose.click();
-  }
-};
 
 const renderComment = (({avatar, name, message}) => {
   const comment = commentTemplate.cloneNode(true);
@@ -33,7 +26,6 @@ const renderComment = (({avatar, name, message}) => {
 
 const renderComments = () => {
   commentsLoaded += COMMENTS_BLOCK;
-
   if (commentsLoaded >= comments.length) {
     commentsLoaderButton.classList.add('hidden');
     commentsLoaded = comments.length;
@@ -72,5 +64,12 @@ const closeBigPicture = () => {
 };
 
 bigPictureClose.addEventListener('click', closeBigPicture);
+
+function onDocumentKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeBigPicture();
+  }
+}
 
 export {openBigPicture};

@@ -2,6 +2,7 @@
 
 const MAX_HASHTAG_COUNT = 5;
 const MAX_HASHTAG_LENGTH = 20;
+
 const ErrorMessages = {
   FIRST_SYMBOL_ERROR: 'Хэш-тег должен начинаться с символа # (решётка)',
   SYMBOL_ERROR: 'Хэш-теги должны содержать буквы и числа, разделяться пробелами',

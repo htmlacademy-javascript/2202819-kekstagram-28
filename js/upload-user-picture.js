@@ -9,7 +9,6 @@ const effectsPreview = document.querySelectorAll('.effects__preview');
 const uploadUserPicture = () => {
   const userPicture = pictureUploadButton.files[0];
   const userPictureName = userPicture.name.toLowerCase();
-
   const validateType = PICTURE_TYPES.some((type) => userPictureName.endsWith(type));
   if (validateType) {
     picturePreview.src = URL.createObjectURL(userPicture);
