@@ -12,9 +12,9 @@ const Filter = {
   DISCUSSED: 'filter-discussed',
 };
 
-let currentFilter = Filter.DEFAULT;
-
 const filtersContainer = document.querySelector('.img-filters');
+
+let currentFilter = Filter.DEFAULT;
 
 const showFilters = () => {
   filtersContainer.classList.remove('img-filters--inactive');
@@ -43,12 +43,10 @@ const setOnFilterClick = (pictures) => {
     if (!evt.target.classList.contains('img-filters__button')) {
       return;
     }
-
     const activeButton = evt.target;
     if (activeButton.id === currentFilter) {
       return;
     }
-
     filtersContainer
       .querySelector('.img-filters__button--active')
       .classList.remove('img-filters__button--active');
