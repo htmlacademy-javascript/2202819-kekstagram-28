@@ -52,7 +52,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-const onPictureUploadFormSubmit = () => {
+const setOnPictureUploadFormSubmit = () => {
   pictureUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     if(pristineValidate()) {
@@ -77,4 +77,4 @@ function onDocumentKeydown (evt) {
   }
 }
 
-export {closePictureUploadForm, onPictureUploadFormSubmit};
+export {closePictureUploadForm, setOnPictureUploadFormSubmit};
