@@ -4,7 +4,7 @@ import {getData} from './api.js';
 import {showAlert} from './util.js';
 import {createGallery} from './gallery.js';
 import {showFilters, setOnFilterClick} from './filter.js';
-import {closePictureUploadForm, onPictureUploadFormSubmit} from './form.js';
+import {closePictureUploadForm, setOnPictureUploadFormSubmit} from './form.js';
 
 getData()
   .then((pictures) => {
@@ -16,4 +16,4 @@ getData()
     showAlert(err.message);
   });
 
-onPictureUploadFormSubmit(closePictureUploadForm);
+setOnPictureUploadFormSubmit(closePictureUploadForm);
